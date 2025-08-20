@@ -2,6 +2,7 @@ package codebuds.poketmon.run;
 
 import codebuds.poketmon.aggregate.Member;
 import codebuds.poketmon.aggregate.PoketMon;
+import codebuds.poketmon.service.PoketMosterGameService;
 
 import java.util.Scanner;
 
@@ -51,8 +52,7 @@ public class Application {
                         gameStart(loginMember);
                         break;
                     case 2: // 회원 탈퇴
-                        gs.deleteMember(loginMember);
-                        loginMember = null;
+                        if(gs.deleteMember(loginMember)) loginMember = null;
                         break;
                     case 3: // 로그아웃
                         loginMember = null;
@@ -138,7 +138,7 @@ public class Application {
             switch (input) {
                 case 1:
                     System.out.println("몬스터 볼을 던집니다.");
-                    isCatch = gs.catchPoketMon(pm);     // 몬스터 볼 투척해서 성공 or 실패
+                    isCatch = gs.catchPoketMon(member, pm);     // 몬스터 볼 투척해서 성공 or 실패
                     count++;
                     break;
                 case 2:
@@ -149,7 +149,6 @@ public class Application {
             }
 
             if (isCatch == true) {
-                member = gs.updateMyPoketMon(pm);
                 System.out.println(pm.getName() + "을 성공적으로 잡았습니다.");
                 return;
             }
@@ -181,7 +180,7 @@ public class Application {
                 case 1:
                     System.out.print("방생할 포켓몬의 번호를 입력하세요: ");
                     input = sc.nextInt();
-                    member = gs.removeMyPoketMon(member, input - 1);    // 변경된 정보를 member에 적용해야 하므로
+                    gs.removeMyPoketMon(member, input - 1);    // 변경된 정보를 member에 적용해야 하므로
                     break;
                 case 2:
                     System.out.println("열람할 포켓몬의 번호를 입력하세요: ");
