@@ -1,9 +1,10 @@
 package codebuds.poketmon.aggregate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Member implements Serializable {
+public class Member implements Serializable, Cloneable {
     private int userNum;
     private String name;
     private String pw;
@@ -87,5 +88,26 @@ public class Member implements Serializable {
                 ", myPoketMons=" + myPoketMons +
                 ", accountStatus=" + accountStatus +
                 '}';
+    }
+
+    @Override
+    public Member clone() throws CloneNotSupportedException {
+        Member cloned = (Member) super.clone();
+
+        List<PoketMon> clonedMyPoketMons = new ArrayList<>();
+        if (myPoketMons != null) {
+            for (PoketMon poketMon : myPoketMons) {
+                if (poketMon != null) {
+                    clonedMyPoketMons.add(poketMon.clone());
+                } else {
+                    cloned.setMyPoketMons(null);
+                }
+            }
+            cloned.setMyPoketMons(clonedMyPoketMons);
+        } else {
+            cloned.setMyPoketMons(null);
+        }
+
+        return cloned;
     }
 }

@@ -1,9 +1,10 @@
 package codebuds.poketmon.aggregate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class PoketMon implements Serializable {
+public class PoketMon implements Serializable, Cloneable {
     private int poketNum;
     private String name;
     private int Level;
@@ -81,5 +82,25 @@ public class PoketMon implements Serializable {
                 ", appearRate=" + appearRate +
                 ", skils=" + skils +
                 '}';
+    }
+
+    @Override
+    public PoketMon clone() throws CloneNotSupportedException {
+        PoketMon cloned = (PoketMon) super.clone();
+        List<Skil> clonedSkils = new ArrayList<>();
+        if (this.skils != null) {
+            for (Skil skil : this.skils) {
+                if (skil != null) {
+                    clonedSkils.add(skil.clone());
+                } else {
+                    clonedSkils.add(null);
+                }
+            }
+            cloned.setSkils(clonedSkils);
+        } else {
+            cloned.setSkils(null);
+        }
+
+        return cloned;
     }
 }
