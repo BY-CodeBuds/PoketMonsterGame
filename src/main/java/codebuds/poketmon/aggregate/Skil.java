@@ -2,7 +2,7 @@ package codebuds.poketmon.aggregate;
 
 import java.io.Serializable;
 
-public class Skil implements Serializable {
+public class Skil implements Serializable, Cloneable {
     private String name;
     private int power;
 
@@ -36,5 +36,10 @@ public class Skil implements Serializable {
                 "name='" + name + '\'' +
                 ", power=" + power +
                 '}';
+    }
+
+    @Override
+    public Skil clone() throws CloneNotSupportedException {
+        return (Skil)super.clone();
     }
 }
