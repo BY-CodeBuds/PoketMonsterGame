@@ -1,6 +1,8 @@
 package codebuds.poketmon.aggregate;
 
-public class Skil {
+import java.io.Serializable;
+
+public class Skil implements Serializable {
     private String name;
     private int power;
 

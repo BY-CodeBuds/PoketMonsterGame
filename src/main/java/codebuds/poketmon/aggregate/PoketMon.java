@@ -1,8 +1,9 @@
 package codebuds.poketmon.aggregate;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PoketMon {
+public class PoketMon implements Serializable {
     private int poketNum;
     private String name;
     private int Level;
