@@ -14,6 +14,12 @@ public class Member implements Serializable {
     public Member() {
     }
 
+    public Member(String name, String pw, int age) {
+        this.name = name;
+        this.pw = pw;
+        this.age = age;
+    }
+
     public Member(int userNum, String name, String pw, int age, List<PoketMon> myPoketMons, AccountStatus accountStatus) {
         this.userNum = userNum;
         this.name = name;
