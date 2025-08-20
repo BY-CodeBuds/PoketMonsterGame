@@ -116,13 +116,13 @@ public class PoketMosterGameService {
 
             //member update, 레퍼지토리 업데이트
             int result = poketmonRepo.catchPoketMon(member.getUserNum(), pm);
-            
+            if(result > 0) {
+                member.setMyPoketMons(poketmonRepo.loadMyPoketMon(member.getUserNum()));
+                System.out.println(pm.getName() + "을 성공적으로 잡았습니다.");
+            } else {
+                System.out.println(pm.getName() + "이 몬스터볼을 피했습니다.");
+            }
         }
         return isCatch;
-    }
-
-    // 포켓몬 잡기 후 멤버에 업데이트
-    public Member updateMyPoketMon(Member member, PoketMon pm) {
-
     }
 }

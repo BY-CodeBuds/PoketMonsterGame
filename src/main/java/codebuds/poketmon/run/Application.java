@@ -149,7 +149,6 @@ public class Application {
             }
 
             if (isCatch == true) {
-                System.out.println(pm.getName() + "을 성공적으로 잡았습니다.");
                 return;
             }
             if (count == 3) {
