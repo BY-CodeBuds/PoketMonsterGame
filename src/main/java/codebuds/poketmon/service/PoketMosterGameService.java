@@ -92,13 +92,33 @@ public class PoketMosterGameService {
             appearRateList.add(appearRate);
         }
 
-        int rand = ((int)Math.random() * 10000000) % sumAppearRate;
-        
+        int rand = ((int)Math.random() * 24563218) % sumAppearRate; // 비율 맞추기
+
+        PoketMon pm = null;
+        int sum = 0;
+        for(int i = 0; i < appearRateList.size(); i++) {
+            if(rand >= sum && rand < sum + appearRateList.get(i)) {
+                pm = pmList.get(i);
+            }
+            sum += appearRateList.get(i);
+        }
+        return pm;
     }
 
     // 포켓몬 잡기 성공 or 실파
     public boolean catchPoketMon(Member member, PoketMon pm) {
+        boolean isCatch = false;
+        double rand = Math.random();
 
+        // 잡기 성공
+        if(rand <= pm.getAppearRate()) {
+            isCatch = true;
+
+            //member update, 레퍼지토리 업데이트
+            int result = poketmonRepo.catchPoketMon(member.getUserNum(), pm);
+            
+        }
+        return isCatch;
     }
 
     // 포켓몬 잡기 후 멤버에 업데이트
